@@ -5,7 +5,7 @@ export const Sticker = ({ sticker: { id, img, label }, onDelete }) => {
     <CardWrapper>
       <Image src={img} alt={label} />
       <Label>{label}</Label>
-      <button>Delete</button>
+      <button onClick={() => onDelete(id)}>Delete</button>
     </CardWrapper>
   );
 };

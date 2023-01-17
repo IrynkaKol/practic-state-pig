@@ -1,19 +1,28 @@
-import { Component, ReactNode } from 'react';
-//import { nanoid } from 'nanoid';
+import { Component } from 'react';
+import { nanoid } from 'nanoid';
 import { Layout } from 'components/Layout';
 import { StickerForm } from './StickerForm';
 import { StickerList } from './StickerList';
-//import initialStickers from '../../stickers.json';
+import initialStickers from '../../stickers.json';
 
 export class App3 extends Component {
-  state={
-    stickers: [],
-  }
-  render(): ReactNode {
+  state = {
+    stickers: initialStickers,
+  };
+  addSticker = (img, label) => {
+    console.log(img, label);
+    this.setState(prevState => ({
+      stickers: [...prevState.stickers, { id: nanoid(), img, label }],
+    }));
+  };
+  deleteSticker = stickerId => {};
+
+  render() {
     return (
       <Layout>
-        <StickerForm />
-        <StickerList items={this.state.stickers}/>
+        <h1>Example 3</h1>
+        <StickerForm onSubmit={this.addSticker} />
+        <StickerList items={this.state.stickers} onDelete={this.deleteSticker}/>
       </Layout>
     );
   }
