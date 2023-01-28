@@ -15,7 +15,12 @@ export class App3 extends Component {
       stickers: [...prevState.stickers, { id: nanoid(), img, label }],
     }));
   };
-  deleteSticker = stickerId => {};
+  deleteSticker = stickerId => {
+    //console.log(stickerId)
+    this.setState(prevState => ({
+      stickers: prevState.stickers.filter(sticker => sticker.id !== stickerId)
+    }))
+  };
 
   render() {
     return (
