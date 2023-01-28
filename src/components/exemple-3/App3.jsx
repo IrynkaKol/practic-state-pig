@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { Layout } from 'components/Layout';
 import { StickerForm } from './StickerForm';
@@ -6,24 +6,39 @@ import { StickerList } from './StickerList';
 import initialStickers from '../../stickers.json';
 
 export const App3 = () => {
-  const [stickers, setStickers] = useState(initialStickers)
-  
+  const [stickers, setStickers] = useState(initialStickers);
+
   const addSticker = (img, label) => {
-    setStickers(prevState => [...prevState, { id: nanoid(), img, label }])
-  }
-  const deleteSticker = (stickerId) => {
-    setStickers(prevState => prevState.stickers.filter(sticker => sticker.id !== stickerId))
-  }
+    setStickers(prevState => [...prevState, { id: nanoid(), img, label }]);
+  };
+  const deleteSticker = stickerId => {
+    setStickers(prevState =>
+      prevState.filter(sticker => sticker.id !== stickerId)
+    );
+  };
+  useEffect(() => {
+    const savedStickers = localStorage.getItem('stickers');
+    if (savedStickers !== null) {
+      const parsedStickers = JSON.parse(savedStickers);
+      setStickers(parsedStickers );
+    } else {
+      setStickers(initialStickers);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('stickers', JSON.stringify(stickers));
+  }, [stickers])
 
   return (
-   <Layout>
-     <h1>Example 3</h1>
-     <StickerForm onSubmit={addSticker} />
-     <StickerList items={stickers} onDelete={deleteSticker}/>
-   </Layout>
- );
- }
- /*
+    <Layout>
+      <h1>Example 3</h1>
+      <StickerForm onSubmit={addSticker} />
+      <StickerList items={stickers} onDelete={deleteSticker} />
+    </Layout>
+  );
+};
+/*
 export class App3 extends Component {
   state = {
     stickers: initialStickers,
@@ -40,6 +55,22 @@ export class App3 extends Component {
       stickers: prevState.stickers.filter(sticker => sticker.id !== stickerId)
     }))
   };
+
+  componentDidMount() {
+    const savedStickers = localStorage.getItem('stickers');
+    if (savedStickers !== null) {
+      const parsedStickers = JSON.parse(savedStickers);
+      this.setState({ stickers: parsedStickers });
+    } else {
+      this.setState({ stickers: initialStickers });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.stickers !== this.state.stickers) {
+      localStorage.setItem('stickers', JSON.stringify(this.state.stickers));
+    }
+  }
 
   render() {
     return (
