@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/practic-state-pig//static/css/main.c3d5249d.css",
-    "main.js": "/practic-state-pig//static/js/main.28232a4c.js",
+    "main.js": "/practic-state-pig//static/js/main.47f6aa35.js",
     "index.html": "/practic-state-pig//index.html",
     "main.c3d5249d.css.map": "/practic-state-pig//static/css/main.c3d5249d.css.map",
-    "main.28232a4c.js.map": "/practic-state-pig//static/js/main.28232a4c.js.map"
+    "main.47f6aa35.js.map": "/practic-state-pig//static/js/main.47f6aa35.js.map"
   },
   "entrypoints": [
     "static/css/main.c3d5249d.css",
-    "static/js/main.28232a4c.js"
+    "static/js/main.47f6aa35.js"
   ]
 }
