@@ -16,6 +16,7 @@ export const App3 = () => {
       prevState.filter(sticker => sticker.id !== stickerId)
     );
   };
+  
   useEffect(() => {
     const savedStickers = localStorage.getItem('stickers');
     if (savedStickers !== null) {
